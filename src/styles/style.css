@@ -1,0 +1,21 @@
+.calendar {
+  width: 90vw;
+  height: 90vh;
+}
+
+.eventForm {
+  background-color: white;
+  position: absolute;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.form {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  padding: 0.5em;
+  border: black solid 1px;
+  z-index: 1000;
+}
