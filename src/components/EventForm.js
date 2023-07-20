@@ -1,37 +1,106 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import handleDates from '../utils/handleDates';
+import handleDateValidation from '../utils/handleDateValidation';
 
-const EventForm = ({ handleNewEvent, newEvent, setNewEvent }) => {
+const EventForm = ({
+  handleNewEvent,
+  newEvent,
+  setNewEvent,
+  setDateValidation,
+  dateValidation,
+  events,
+  titleValidation,
+  setTitleValidation,
+}) => {
+  const [event, setEvent] = useState(newEvent);
+
+  const handleChange = (e, property) => {
+    setDateValidation(true);
+    setTitleValidation(true);
+
+    setEvent({ ...event, [property]: e.target.value });
+  };
+
+  useEffect(() => {
+    let validated = 'event validated';
+    let startDate = '';
+    let endDate = '';
+
+    if (
+      event.startDay !== '' &&
+      event.endDay !== '' &&
+      event.startTime !== undefined &&
+      event.endTime !== undefined
+    ) {
+      console.log(event.startDay);
+
+      startDate = handleDates(
+        new Date(event.startDay),
+        event.startTime
+      );
+
+      endDate = handleDates(new Date(event.endDay), event.endTime);
+      validated = handleDateValidation({
+        start: startDate,
+        end: endDate,
+      });
+    }
+
+    if (validated === 'event not validated') {
+      setDateValidation(false);
+    } else {
+      setNewEvent({
+        id: events.length + 1,
+        title: event.title,
+        start: startDate,
+        end: endDate,
+      });
+    }
+  }, [
+    event.endDay,
+    event.endTime,
+    event.startDay,
+    event.startTime,
+    event.title,
+    events.length,
+    setNewEvent,
+    setDateValidation,
+  ]);
+
+  useEffect(() => {
+    console.log(event.title);
+    if (event.title === '') {
+      setTitleValidation((prev) => !prev);
+    }
+  }, [event.title, setTitleValidation]);
+
   return (
     <Form className="eventForm" onSubmit={handleNewEvent}>
       <Form.Field>
         Title:
         <input
           type="text"
-          value={newEvent.title}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, title: e.target.value })
+          value={event.title}
+          onChange={
+            (e) => handleChange(e, 'title')
+            // setNewEvent({ ...newEvent, title: e.target.value })
           }
         />
+        {titleValidation ? (
+          <></>
+        ) : (
+          <p>The title should not be empty</p>
+        )}
       </Form.Field>
       <Form.Field>
         Start day:
         <input
           type="date"
-          value={newEvent.startDay}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, startDay: e.target.value })
-          }
-        />
-      </Form.Field>
-      <Form.Field>
-        End day:
-        <input
-          type="date"
-          value={newEvent.endDay}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, endDay: e.target.value })
+          value={event.startDay}
+          onChange={
+            (e) => handleChange(e, 'startDay')
+            // setNewEvent({ ...newEvent, startDay: e.target.value })
           }
         />
       </Form.Field>
@@ -39,22 +108,41 @@ const EventForm = ({ handleNewEvent, newEvent, setNewEvent }) => {
         Start Time:
         <input
           type="time"
-          value={newEvent.startTime}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, startTime: e.target.value })
+          value={event.startTime}
+          onChange={
+            (e) => handleChange(e, 'startTime')
+            // setNewEvent({ ...newEvent, startTime: e.target.value })
           }
         />
       </Form.Field>
       <Form.Field>
-        End Time:
+        End day:
         <input
-          type="time"
-          value={newEvent.endTime}
-          onChange={(e) =>
-            setNewEvent({ ...newEvent, endTime: e.target.value })
+          type="date"
+          value={event.endDay}
+          onChange={
+            (e) => handleChange(e, 'endDay')
+            // setNewEvent({ ...newEvent, endDay: e.target.value })
           }
         />
       </Form.Field>
+
+      <Form.Field>
+        End Time:
+        <input
+          type="time"
+          value={event.endTime}
+          onChange={
+            (e) => handleChange(e, 'endTime')
+            // setNewEvent({ ...newEvent, endTime: e.target.value })
+          }
+        />
+      </Form.Field>
+      {dateValidation ? (
+        <></>
+      ) : (
+        <p>The dates are not correct, please check your input</p>
+      )}
       <Button type="submit">Add Event</Button>
     </Form>
   );
