@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import EventForm from '../components/EventForm';
-// import handleDates from '../utils/handleDates';
-
-//
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import newEventValidation from '../utils/newEventValidation';
 
 const localizer = momentLocalizer(moment);
 
@@ -45,21 +41,6 @@ const Scheduler = () => {
 
   const handleNewEvent = () => {
     console.log(newEvent);
-    // const startDate = handleDates(
-    //   new Date(newEvent.startDay),
-    //   newEvent.startTime
-    // );
-    // const endDate = handleDates(
-    //   new Date(newEvent.endDay),
-    //   newEvent.endTime
-    // );
-    // const validation = newEventValidation({
-    //   id: events.length + 1,
-    //   title: newEvent.title,
-    //   start: startDate,
-    //   end: endDate,
-    // });
-
     if (dateValidation === true && titleValidation === true) {
       events.push(newEvent);
     }

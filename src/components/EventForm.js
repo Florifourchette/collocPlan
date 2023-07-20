@@ -69,7 +69,6 @@ const EventForm = ({
   ]);
 
   useEffect(() => {
-    console.log(event.title);
     if (event.title === '') {
       setTitleValidation((prev) => !prev);
     }
@@ -82,10 +81,7 @@ const EventForm = ({
         <input
           type="text"
           value={event.title}
-          onChange={
-            (e) => handleChange(e, 'title')
-            // setNewEvent({ ...newEvent, title: e.target.value })
-          }
+          onChange={(e) => handleChange(e, 'title')}
         />
         {titleValidation ? (
           <></>
@@ -98,10 +94,7 @@ const EventForm = ({
         <input
           type="date"
           value={event.startDay}
-          onChange={
-            (e) => handleChange(e, 'startDay')
-            // setNewEvent({ ...newEvent, startDay: e.target.value })
-          }
+          onChange={(e) => handleChange(e, 'startDay')}
         />
       </Form.Field>
       <Form.Field>
@@ -109,10 +102,7 @@ const EventForm = ({
         <input
           type="time"
           value={event.startTime}
-          onChange={
-            (e) => handleChange(e, 'startTime')
-            // setNewEvent({ ...newEvent, startTime: e.target.value })
-          }
+          onChange={(e) => handleChange(e, 'startTime')}
         />
       </Form.Field>
       <Form.Field>
@@ -120,10 +110,7 @@ const EventForm = ({
         <input
           type="date"
           value={event.endDay}
-          onChange={
-            (e) => handleChange(e, 'endDay')
-            // setNewEvent({ ...newEvent, endDay: e.target.value })
-          }
+          onChange={(e) => handleChange(e, 'endDay')}
         />
       </Form.Field>
 
@@ -132,10 +119,7 @@ const EventForm = ({
         <input
           type="time"
           value={event.endTime}
-          onChange={
-            (e) => handleChange(e, 'endTime')
-            // setNewEvent({ ...newEvent, endTime: e.target.value })
-          }
+          onChange={(e) => handleChange(e, 'endTime')}
         />
       </Form.Field>
       {dateValidation ? (
