@@ -51,6 +51,10 @@ const Scheduler = () => {
     console.log(events);
   };
 
+  const handleDateSelect = () => {
+    console.log('hello');
+  };
+
   useEffect(() => {}, [newEventClicked]);
 
   return (
@@ -62,6 +66,8 @@ const Scheduler = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
+          selectable={true}
+          onSelectEvent={handleDateSelect}
         />
       </div>
       {newEventClicked ? (
