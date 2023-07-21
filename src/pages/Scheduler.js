@@ -22,17 +22,15 @@ const test = [
 ];
 
 const Scheduler = () => {
-  const eventState = {
+  const newEventState = {
     title: '',
-    startDay: new Date(2023, 7, 19, 11, 0),
-    endDay: '',
-    startTime: '',
-    endTime: '',
+    start: '',
+    end: '',
   };
   const [newEventClicked, setNewEventClicked] = useState(false);
   const [dateValidation, setDateValidation] = useState(true);
   const [titleValidation, setTitleValidation] = useState(true);
-  const [newEvent, setNewEvent] = useState(eventState);
+  const [newEvent, setNewEvent] = useState(newEventState);
   const events = test;
 
   const handleClick = () => {
@@ -45,18 +43,27 @@ const Scheduler = () => {
       events.push(newEvent);
     }
     setNewEventClicked((prev) => !prev);
-    setNewEvent(eventState);
+    setNewEvent(newEventState);
     setTitleValidation(true);
     setDateValidation(true);
     console.log(events);
   };
 
   const handleDateSelect = ({ start, end }) => {
-    console.log(start);
+    // setNewEvent({ ...newEvent, start: start, end: end });
+    const startDate = start.toUTCString();
+    const endDate = end.toUTCString();
+    setNewEvent({
+      ...newEvent,
+      start: startDate,
+      end: endDate,
+    });
     setNewEventClicked(true);
   };
 
-  useEffect(() => {}, [newEventClicked]);
+  useEffect(() => {
+    console.log(newEvent);
+  }, [newEventClicked, newEvent]);
 
   return (
     <>
@@ -82,8 +89,9 @@ const Scheduler = () => {
           events={events}
           titleValidation={titleValidation}
           setTitleValidation={setTitleValidation}
-          eventState={eventState}
           setNewEventClicked={setNewEventClicked}
+          selectedStart={newEvent.start}
+          selectedEnd={newEvent.end}
         />
       ) : (
         <></>

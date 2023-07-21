@@ -3,6 +3,14 @@ import { Button, Form } from 'semantic-ui-react';
 import handleDates from '../utils/handleDates';
 import handleDateValidation from '../utils/handleDateValidation';
 
+const eventState = {
+  title: '',
+  startDay: '',
+  startTime: '',
+  endDay: '',
+  endTime: '',
+};
+
 const EventForm = ({
   handleNewEvent,
   newEvent,
@@ -12,11 +20,15 @@ const EventForm = ({
   events,
   titleValidation,
   setTitleValidation,
-  eventState,
   setNewEventClicked,
+  selectedStart,
+  selectedEnd,
 }) => {
+  console.log(newEvent);
+  console.log(selectedStart);
+  console.log(selectedEnd);
+
   const [event, setEvent] = useState(eventState);
-  console.log(event);
   const handleChange = (e, property) => {
     setDateValidation(true);
     setTitleValidation(true);
@@ -34,8 +46,6 @@ const EventForm = ({
       event.startTime !== undefined &&
       event.endTime !== undefined
     ) {
-      console.log(event.startDay);
-
       startDate = handleDates(
         new Date(event.startDay),
         event.startTime
@@ -48,14 +58,16 @@ const EventForm = ({
       });
     }
 
+    console.log(startDate);
+
     if (validated === 'event not validated') {
       setDateValidation(false);
     } else {
       setNewEvent({
         id: events.length + 1,
         title: event.title,
-        start: startDate,
-        end: endDate,
+        start: new Date(startDate).toUTCString(),
+        end: new Date(endDate).toUTCString(),
       });
     }
   }, [
@@ -74,6 +86,52 @@ const EventForm = ({
       setTitleValidation((prev) => !prev);
     }
   }, [event.title, setTitleValidation]);
+
+  useEffect(() => {
+    console.log(selectedStart);
+    const newStart = new Date(selectedStart);
+    const newEnd = new Date(selectedEnd);
+
+    const newStartDay = `${newStart.getFullYear()}-${
+      newStart.getMonth() < 10
+        ? '0' + newStart.getMonth()
+        : newStart.getMonth()
+    }-${newStart.getDate()}`;
+
+    const newEndDay = `${newEnd.getFullYear()}-${
+      newEnd.getMonth() < 10
+        ? '0' + newEnd.getMonth()
+        : newEnd.getMonth()
+    }-${newEnd.getDate()}`;
+
+    const newStartTime = `${
+      newStart.getHours() < 10
+        ? '0' + newStart.getHours()
+        : newStart.getHours()
+    }:${
+      newStart.getMinutes() < 10
+        ? '0' + newStart.getMinutes()
+        : newStart.getMinutes()
+    }`;
+
+    const newEndTime = `${
+      newEnd.getHours() < 10
+        ? '0' + newEnd.getHours()
+        : newEnd.getHours()
+    }:${
+      newEnd.getMinutes() < 10
+        ? '0' + newEnd.getMinutes()
+        : newEnd.getMinutes()
+    }`;
+    setEvent({
+      ...event,
+      startDay: newStartDay,
+      startTime: newStartTime,
+      endDay: newEndDay,
+      endTime: newEndTime,
+    });
+    console.log(newStart.getMonth());
+  }, [selectedStart, selectedEnd]);
 
   return (
     <>
