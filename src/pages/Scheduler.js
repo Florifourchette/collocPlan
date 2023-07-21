@@ -69,7 +69,7 @@ const Scheduler = () => {
           endAccessor="end"
           selectable={true}
           onSelectSlot={handleDateSelect}
-          longPressThreshold={0}
+          longPressThreshold={1}
         />
       </div>
       {newEventClicked ? (
