@@ -12,13 +12,14 @@ const EventForm = ({
   events,
   titleValidation,
   setTitleValidation,
+  eventState,
+  setNewEventClicked,
 }) => {
-  const [event, setEvent] = useState(newEvent);
-
+  const [event, setEvent] = useState(eventState);
+  console.log(event);
   const handleChange = (e, property) => {
     setDateValidation(true);
     setTitleValidation(true);
-
     setEvent({ ...event, [property]: e.target.value });
   };
 
@@ -75,60 +76,65 @@ const EventForm = ({
   }, [event.title, setTitleValidation]);
 
   return (
-    <Form className="eventForm" onSubmit={handleNewEvent}>
-      <Form.Field>
-        Title:
-        <input
-          type="text"
-          value={event.title}
-          onChange={(e) => handleChange(e, 'title')}
-        />
-        {titleValidation ? (
+    <>
+      <Form className="eventForm" onSubmit={handleNewEvent}>
+        <button onClick={() => setNewEventClicked(false)}>
+          cancel
+        </button>
+        <Form.Field>
+          Title:
+          <input
+            type="text"
+            value={event.title}
+            onChange={(e) => handleChange(e, 'title')}
+          />
+          {titleValidation ? (
+            <></>
+          ) : (
+            <p>The title should not be empty</p>
+          )}
+        </Form.Field>
+        <Form.Field>
+          Start day:
+          <input
+            type="date"
+            value={event.startDay}
+            onChange={(e) => handleChange(e, 'startDay')}
+          />
+        </Form.Field>
+        <Form.Field>
+          Start Time:
+          <input
+            type="time"
+            value={event.startTime}
+            onChange={(e) => handleChange(e, 'startTime')}
+          />
+        </Form.Field>
+        <Form.Field>
+          End day:
+          <input
+            type="date"
+            value={event.endDay}
+            onChange={(e) => handleChange(e, 'endDay')}
+          />
+        </Form.Field>
+
+        <Form.Field>
+          End Time:
+          <input
+            type="time"
+            value={event.endTime}
+            onChange={(e) => handleChange(e, 'endTime')}
+          />
+        </Form.Field>
+        {dateValidation ? (
           <></>
         ) : (
-          <p>The title should not be empty</p>
+          <p>The dates are not correct, please check your input</p>
         )}
-      </Form.Field>
-      <Form.Field>
-        Start day:
-        <input
-          type="date"
-          value={event.startDay}
-          onChange={(e) => handleChange(e, 'startDay')}
-        />
-      </Form.Field>
-      <Form.Field>
-        Start Time:
-        <input
-          type="time"
-          value={event.startTime}
-          onChange={(e) => handleChange(e, 'startTime')}
-        />
-      </Form.Field>
-      <Form.Field>
-        End day:
-        <input
-          type="date"
-          value={event.endDay}
-          onChange={(e) => handleChange(e, 'endDay')}
-        />
-      </Form.Field>
-
-      <Form.Field>
-        End Time:
-        <input
-          type="time"
-          value={event.endTime}
-          onChange={(e) => handleChange(e, 'endTime')}
-        />
-      </Form.Field>
-      {dateValidation ? (
-        <></>
-      ) : (
-        <p>The dates are not correct, please check your input</p>
-      )}
-      <Button type="submit">Add Event</Button>
-    </Form>
+        <Button type="submit">Add Event</Button>
+      </Form>
+    </>
   );
 };
 

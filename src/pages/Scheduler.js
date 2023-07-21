@@ -24,7 +24,7 @@ const test = [
 const Scheduler = () => {
   const eventState = {
     title: '',
-    startDay: '',
+    startDay: new Date(2023, 7, 19, 11, 0),
     endDay: '',
     startTime: '',
     endTime: '',
@@ -51,8 +51,9 @@ const Scheduler = () => {
     console.log(events);
   };
 
-  const handleDateSelect = () => {
-    console.log('hello');
+  const handleDateSelect = ({ start, end }) => {
+    console.log(start);
+    setNewEventClicked(true);
   };
 
   useEffect(() => {}, [newEventClicked]);
@@ -67,7 +68,8 @@ const Scheduler = () => {
           startAccessor="start"
           endAccessor="end"
           selectable={true}
-          onSelectEvent={handleDateSelect}
+          onSelectSlot={handleDateSelect}
+          longPressThreshold={0}
         />
       </div>
       {newEventClicked ? (
@@ -80,6 +82,8 @@ const Scheduler = () => {
           events={events}
           titleValidation={titleValidation}
           setTitleValidation={setTitleValidation}
+          eventState={eventState}
+          setNewEventClicked={setNewEventClicked}
         />
       ) : (
         <></>
