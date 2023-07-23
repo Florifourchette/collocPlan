@@ -79,8 +79,8 @@ const Scheduler = () => {
 
   const handleDateSelect = ({ start, end }) => {
     console.log(start);
-    const startDate = start.toUTCString();
-    const endDate = end.toUTCString();
+    const startDate = start;
+    const endDate = end;
     setSelectedDates({
       selectedStart: startDate,
       selectedEnd: endDate,
