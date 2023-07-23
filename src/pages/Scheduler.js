@@ -22,6 +22,12 @@ const test = [
     start: new Date(2023, 6, 19, 11, 0),
     end: new Date(2023, 6, 20, 12, 0),
   },
+  {
+    id: 3,
+    title: 'Meeting 3',
+    start: new Date(2023, 6, 23, 11, 0),
+    end: new Date(2023, 6, 23, 12, 0),
+  },
 ];
 
 const Scheduler = () => {
@@ -79,11 +85,6 @@ const Scheduler = () => {
       selectedStart: startDate,
       selectedEnd: endDate,
     });
-    // setNewEvent({
-    //   ...newEvent,
-    //   start: startDate,
-    //   end: endDate,
-    // });
     setNewEventClicked(true);
   };
 

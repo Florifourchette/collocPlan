@@ -5,8 +5,6 @@ import handleDateValidation from '../utils/handleDateValidation';
 import dateConverter from '../utils/dateConverter';
 import timeConverter from '../utils/timeConverter';
 
-const today = new Date();
-
 const EventForm = ({
   handleNewEvent,
   setNewEvent,
