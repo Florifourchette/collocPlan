@@ -2,18 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import handleDates from '../utils/handleDates';
 import handleDateValidation from '../utils/handleDateValidation';
+import dateConverter from '../utils/dateConverter';
+import timeConverter from '../utils/timeConverter';
 
-const eventState = {
-  title: '',
-  startDay: '',
-  startTime: '',
-  endDay: '',
-  endTime: '',
-};
+const today = new Date();
 
 const EventForm = ({
   handleNewEvent,
-  newEvent,
   setNewEvent,
   setDateValidation,
   dateValidation,
@@ -21,16 +16,11 @@ const EventForm = ({
   titleValidation,
   setTitleValidation,
   setNewEventClicked,
-  selectedStart,
-  selectedEnd,
   selectedDates,
+  event,
+  setEvent,
+  eventState,
 }) => {
-  console.log(newEvent);
-  console.log(selectedStart);
-  console.log(selectedEnd);
-  console.log(selectedDates);
-
-  const [event, setEvent] = useState(eventState);
   const handleChange = (e, property) => {
     setDateValidation(true);
     setTitleValidation(true);
@@ -60,8 +50,6 @@ const EventForm = ({
       });
     }
 
-    console.log('setNewEvent useEffect in EventForm');
-
     if (validated === 'event not validated') {
       setDateValidation(false);
     } else {
@@ -84,47 +72,25 @@ const EventForm = ({
   ]);
 
   useEffect(() => {
+    console.log(event.title);
     if (event.title === '') {
       setTitleValidation((prev) => !prev);
     }
-  }, [event.title, setTitleValidation]);
+  }, [event.title]);
 
   useEffect(() => {
     console.log(selectedDates);
+
     const newStart = new Date(selectedDates.selectedStart);
     const newEnd = new Date(selectedDates.selectedEnd);
 
-    const newStartDay = `${newStart.getFullYear()}-${
-      newStart.getMonth() < 10
-        ? '0' + newStart.getMonth()
-        : newStart.getMonth()
-    }-${newStart.getDate()}`;
+    const newStartDay = dateConverter(newStart);
 
-    const newEndDay = `${newEnd.getFullYear()}-${
-      newEnd.getMonth() < 10
-        ? '0' + newEnd.getMonth()
-        : newEnd.getMonth()
-    }-${newEnd.getDate()}`;
+    const newEndDay = dateConverter(newEnd);
 
-    const newStartTime = `${
-      newStart.getHours() < 10
-        ? '0' + newStart.getHours()
-        : newStart.getHours()
-    }:${
-      newStart.getMinutes() < 10
-        ? '0' + newStart.getMinutes()
-        : newStart.getMinutes()
-    }`;
+    const newStartTime = timeConverter(newStart);
 
-    const newEndTime = `${
-      newEnd.getHours() < 10
-        ? '0' + newEnd.getHours()
-        : newEnd.getHours()
-    }:${
-      newEnd.getMinutes() < 10
-        ? '0' + newEnd.getMinutes()
-        : newEnd.getMinutes()
-    }`;
+    const newEndTime = timeConverter(newEnd);
     setEvent({
       ...event,
       startDay: newStartDay,
@@ -132,13 +98,18 @@ const EventForm = ({
       endDay: newEndDay,
       endTime: newEndTime,
     });
-    console.log(newStart.getMonth());
+    setDateValidation(true);
   }, [selectedDates]);
 
   return (
     <>
       <Form className="eventForm" onSubmit={handleNewEvent}>
-        <button onClick={() => setNewEventClicked(false)}>
+        <button
+          onClick={() => {
+            setEvent(eventState);
+            setNewEventClicked(false);
+          }}
+        >
           cancel
         </button>
         <Form.Field>
