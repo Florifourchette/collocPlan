@@ -22,17 +22,19 @@ const test = [
 ];
 
 const Scheduler = () => {
-  const eventState = {
+  const newEventState = {
     title: '',
-    startDay: '',
-    endDay: '',
-    startTime: '',
-    endTime: '',
+    start: '',
+    end: '',
   };
   const [newEventClicked, setNewEventClicked] = useState(false);
   const [dateValidation, setDateValidation] = useState(true);
   const [titleValidation, setTitleValidation] = useState(true);
-  const [newEvent, setNewEvent] = useState(eventState);
+  const [newEvent, setNewEvent] = useState(newEventState);
+  const [selectedDates, setSelectedDates] = useState({
+    selectedStart: '',
+    selectedEnd: '',
+  });
   const events = test;
 
   const handleClick = () => {
@@ -45,13 +47,31 @@ const Scheduler = () => {
       events.push(newEvent);
     }
     setNewEventClicked((prev) => !prev);
-    setNewEvent(eventState);
+    setNewEvent(newEventState);
     setTitleValidation(true);
     setDateValidation(true);
     console.log(events);
   };
 
-  useEffect(() => {}, [newEventClicked]);
+  const handleDateSelect = ({ start, end }) => {
+    console.log(start);
+    const startDate = start.toUTCString();
+    const endDate = end.toUTCString();
+    setSelectedDates({
+      selectedStart: startDate,
+      selectedEnd: endDate,
+    });
+    // setNewEvent({
+    //   ...newEvent,
+    //   start: startDate,
+    //   end: endDate,
+    // });
+    setNewEventClicked(true);
+  };
+
+  useEffect(() => {
+    console.log(newEvent);
+  }, [newEventClicked, newEvent]);
 
   return (
     <>
@@ -62,6 +82,9 @@ const Scheduler = () => {
           events={events}
           startAccessor="start"
           endAccessor="end"
+          selectable={true}
+          onSelectSlot={handleDateSelect}
+          longPressThreshold={1}
         />
       </div>
       {newEventClicked ? (
@@ -74,6 +97,10 @@ const Scheduler = () => {
           events={events}
           titleValidation={titleValidation}
           setTitleValidation={setTitleValidation}
+          setNewEventClicked={setNewEventClicked}
+          selectedStart={newEvent.start}
+          selectedEnd={newEvent.end}
+          selectedDates={selectedDates}
         />
       ) : (
         <></>
