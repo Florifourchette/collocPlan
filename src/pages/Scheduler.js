@@ -31,6 +31,10 @@ const Scheduler = () => {
   const [dateValidation, setDateValidation] = useState(true);
   const [titleValidation, setTitleValidation] = useState(true);
   const [newEvent, setNewEvent] = useState(newEventState);
+  const [selectedDates, setSelectedDates] = useState({
+    selectedStart: '',
+    selectedEnd: '',
+  });
   const events = test;
 
   const handleClick = () => {
@@ -50,14 +54,18 @@ const Scheduler = () => {
   };
 
   const handleDateSelect = ({ start, end }) => {
-    // setNewEvent({ ...newEvent, start: start, end: end });
+    console.log(start);
     const startDate = start.toUTCString();
     const endDate = end.toUTCString();
-    setNewEvent({
-      ...newEvent,
-      start: startDate,
-      end: endDate,
+    setSelectedDates({
+      selectedStart: startDate,
+      selectedEnd: endDate,
     });
+    // setNewEvent({
+    //   ...newEvent,
+    //   start: startDate,
+    //   end: endDate,
+    // });
     setNewEventClicked(true);
   };
 
@@ -92,6 +100,7 @@ const Scheduler = () => {
           setNewEventClicked={setNewEventClicked}
           selectedStart={newEvent.start}
           selectedEnd={newEvent.end}
+          selectedDates={selectedDates}
         />
       ) : (
         <></>

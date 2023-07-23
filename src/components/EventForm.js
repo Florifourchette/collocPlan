@@ -23,10 +23,12 @@ const EventForm = ({
   setNewEventClicked,
   selectedStart,
   selectedEnd,
+  selectedDates,
 }) => {
   console.log(newEvent);
   console.log(selectedStart);
   console.log(selectedEnd);
+  console.log(selectedDates);
 
   const [event, setEvent] = useState(eventState);
   const handleChange = (e, property) => {
@@ -58,7 +60,7 @@ const EventForm = ({
       });
     }
 
-    console.log(startDate);
+    console.log('setNewEvent useEffect in EventForm');
 
     if (validated === 'event not validated') {
       setDateValidation(false);
@@ -88,9 +90,9 @@ const EventForm = ({
   }, [event.title, setTitleValidation]);
 
   useEffect(() => {
-    console.log(selectedStart);
-    const newStart = new Date(selectedStart);
-    const newEnd = new Date(selectedEnd);
+    console.log(selectedDates);
+    const newStart = new Date(selectedDates.selectedStart);
+    const newEnd = new Date(selectedDates.selectedEnd);
 
     const newStartDay = `${newStart.getFullYear()}-${
       newStart.getMonth() < 10
@@ -131,7 +133,7 @@ const EventForm = ({
       endTime: newEndTime,
     });
     console.log(newStart.getMonth());
-  }, [selectedStart, selectedEnd]);
+  }, [selectedDates]);
 
   return (
     <>
