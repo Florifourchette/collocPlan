@@ -22,6 +22,12 @@ const test = [
     start: new Date(2023, 6, 19, 11, 0),
     end: new Date(2023, 6, 20, 12, 0),
   },
+  {
+    id: 3,
+    title: 'Meeting 3',
+    start: new Date(2023, 6, 23, 11, 0),
+    end: new Date(2023, 6, 23, 12, 0),
+  },
 ];
 
 const Scheduler = () => {
@@ -73,17 +79,12 @@ const Scheduler = () => {
 
   const handleDateSelect = ({ start, end }) => {
     console.log(start);
-    const startDate = start.toUTCString();
-    const endDate = end.toUTCString();
+    const startDate = start;
+    const endDate = end;
     setSelectedDates({
       selectedStart: startDate,
       selectedEnd: endDate,
     });
-    // setNewEvent({
-    //   ...newEvent,
-    //   start: startDate,
-    //   end: endDate,
-    // });
     setNewEventClicked(true);
   };
 

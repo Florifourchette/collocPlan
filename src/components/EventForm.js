@@ -5,8 +5,6 @@ import handleDateValidation from '../utils/handleDateValidation';
 import dateConverter from '../utils/dateConverter';
 import timeConverter from '../utils/timeConverter';
 
-const today = new Date();
-
 const EventForm = ({
   handleNewEvent,
   setNewEvent,
@@ -56,8 +54,8 @@ const EventForm = ({
       setNewEvent({
         id: events.length + 1,
         title: event.title,
-        start: new Date(startDate).toUTCString(),
-        end: new Date(endDate).toUTCString(),
+        start: new Date(startDate),
+        end: new Date(endDate),
       });
     }
   }, [
