@@ -3,6 +3,9 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import EventForm from '../components/EventForm';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import addMinutes from '../utils/addMinutes';
+import dateConverter from '../utils/dateConverter';
+import timeConverter from '../utils/timeConverter';
 
 const localizer = momentLocalizer(moment);
 
@@ -27,17 +30,31 @@ const Scheduler = () => {
     start: '',
     end: '',
   };
+
+  const eventState = {
+    title: '',
+    startDay: dateConverter(new Date()),
+    startTime: timeConverter(new Date()),
+    endDay: dateConverter(new Date()),
+    endTime: timeConverter(new Date()),
+  };
+
+  const selectedDatesState = {
+    selectedStart: new Date(),
+    selectedEnd: addMinutes(new Date(), 30),
+  };
+  const [event, setEvent] = useState(eventState);
   const [newEventClicked, setNewEventClicked] = useState(false);
   const [dateValidation, setDateValidation] = useState(true);
   const [titleValidation, setTitleValidation] = useState(true);
   const [newEvent, setNewEvent] = useState(newEventState);
-  const [selectedDates, setSelectedDates] = useState({
-    selectedStart: '',
-    selectedEnd: '',
-  });
+  const [selectedDates, setSelectedDates] = useState(
+    selectedDatesState
+  );
   const events = test;
 
   const handleClick = () => {
+    setSelectedDates(selectedDatesState);
     setNewEventClicked((prev) => !prev);
   };
 
@@ -48,6 +65,7 @@ const Scheduler = () => {
     }
     setNewEventClicked((prev) => !prev);
     setNewEvent(newEventState);
+    setSelectedDates(selectedDatesState);
     setTitleValidation(true);
     setDateValidation(true);
     console.log(events);
@@ -101,6 +119,9 @@ const Scheduler = () => {
           selectedStart={newEvent.start}
           selectedEnd={newEvent.end}
           selectedDates={selectedDates}
+          setEvent={setEvent}
+          event={event}
+          eventState={eventState}
         />
       ) : (
         <></>
