@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Scheduler from '../pages/Scheduler';
 import Home from '../pages/Home';
+import UserPage from '../pages/UserPage';
+import ShoppingList from '../pages/ShoppingList';
 
 const Router = () => {
   return (
@@ -9,6 +11,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/scheduler" element={<Scheduler />}></Route>
+        <Route path="/profile" element={<UserPage />}></Route>
+        <Route path="/grocery" element={<ShoppingList />}></Route>
       </Routes>
     </div>
   );

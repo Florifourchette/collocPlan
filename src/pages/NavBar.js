@@ -19,6 +19,12 @@ const NavBar = () => {
               <NavLink to="/scheduler" activeStyle>
                 Scheduler
               </NavLink>
+              <NavLink to="/profile" activeStyle>
+                Profile
+              </NavLink>
+              <NavLink to="/grocery" activeStyle>
+                Grocery
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
