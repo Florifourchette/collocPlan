@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import handleDates from '../utils/handleDates';
 import handleDateValidation from '../utils/handleDateValidation';

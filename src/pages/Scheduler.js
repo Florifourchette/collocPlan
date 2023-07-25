@@ -6,29 +6,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import addMinutes from '../utils/addMinutes';
 import dateConverter from '../utils/dateConverter';
 import timeConverter from '../utils/timeConverter';
+import schedules from '../samples/schedules';
 
 const localizer = momentLocalizer(moment);
 
-const test = [
-  {
-    id: 1,
-    title: 'Meeting',
-    start: new Date(2023, 6, 19, 10, 0),
-    end: new Date(2023, 6, 19, 11, 0),
-  },
-  {
-    id: 2,
-    title: 'Meeting 2',
-    start: new Date(2023, 6, 19, 11, 0),
-    end: new Date(2023, 6, 20, 12, 0),
-  },
-  {
-    id: 3,
-    title: 'Meeting 3',
-    start: new Date(2023, 6, 23, 11, 0),
-    end: new Date(2023, 6, 23, 12, 0),
-  },
-];
+const test = schedules();
 
 const Scheduler = () => {
   const newEventState = {
@@ -93,7 +75,7 @@ const Scheduler = () => {
   }, [newEventClicked, newEvent]);
 
   return (
-    <>
+    <div className="scheduler">
       <div className="calendar">
         <button onClick={handleClick}>Add new event</button>
         <Calendar
@@ -127,7 +109,7 @@ const Scheduler = () => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
-import Scheduler from './pages/Scheduler';
+import Router from './components/Router';
+import NavBar from './pages/NavBar';
 
 function App() {
   return (
     <div className="App">
-      <Scheduler />
+      <NavBar />
+      <Router />
     </div>
   );
 }
