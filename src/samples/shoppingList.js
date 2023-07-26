@@ -3,12 +3,20 @@ const shoppingList = () => {
     {
       id: 1,
       name: 'shopping list 1',
-      items: ['item 1', 'item 2', 'item 3'],
+      items: [
+        { name: 'item 1', bought: false },
+        { name: 'item 2', bought: true },
+        { name: 'item 3', bought: true },
+      ],
     },
     {
       id: 2,
       name: 'shopping list 2',
-      items: ['item 4', 'item 5', 'item 6'],
+      items: [
+        { name: 'item 4', bought: true },
+        { name: 'item 5', bought: true },
+        { name: 'item 6', bought: false },
+      ],
     },
   ];
 };

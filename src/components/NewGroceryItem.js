@@ -14,7 +14,7 @@ const NewGroceryItem = ({
   const [items, setItems] = useState(list.items);
 
   const handleSumbit = () => {
-    setItems([...items, newItem]);
+    setItems([...items, { name: newItem, bought: false }]);
   };
 
   useEffect(() => {

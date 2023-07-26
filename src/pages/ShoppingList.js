@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import shoppingList from '../samples/shoppingList';
 import NewGroceryItem from '../components/NewGroceryItem';
 import { Card, List } from 'semantic-ui-react';
+import { Form } from 'react-bootstrap';
 
 const ShoppingList = () => {
   const [groceryLists, setGroceryLists] = useState(shoppingList());
@@ -24,6 +25,10 @@ const ShoppingList = () => {
   const handleNewItem = (listIndex) => {
     setActiveList(listIndex);
     setItemForm((prev) => !prev);
+  };
+
+  const handleItemCrossed = (item, status) => {
+    console.log({ ...item, bought: !status });
   };
 
   useEffect(() => {
@@ -59,8 +64,27 @@ const ShoppingList = () => {
                 <Card.Description>
                   <List>
                     {list.items.map((item, index) => {
+                      console.log(item);
                       return (
-                        <List.Item key={index}>{item}</List.Item>
+                        <List.Item
+                          key={index}
+                          className={
+                            item.bought
+                              ? 'itemCrossed'
+                              : 'itemNotCrossed'
+                          }
+                        >
+                          <Form.Check
+                            id={`checkbox`}
+                            defaultChecked={
+                              item.bought ? true : false
+                            }
+                            onChange={() =>
+                              handleItemCrossed(item, item.bought)
+                            }
+                          />
+                          {item.name}
+                        </List.Item>
                       );
                     })}
                     <List.Item
