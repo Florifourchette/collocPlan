@@ -12,7 +12,6 @@ const ShoppingList = () => {
     useState(false);
   const [newGroceryLists, setNewGroceryLists] =
     useState(groceryLists);
-  console.log(groceryLists);
 
   const handleDeleteList = (index) => {
     setGroceryLists(
@@ -27,19 +26,38 @@ const ShoppingList = () => {
     setItemForm((prev) => !prev);
   };
 
-  const handleItemCrossed = (item, status) => {
-    console.log({ ...item, bought: !status });
+  const handleItemCrossed = (
+    item,
+    status,
+    listID,
+    itemIndex,
+    items,
+    list
+  ) => {
+    const updatedItem = { ...item, bought: !status };
+    items = items.map((item) => {
+      if (items.indexOf(item) === itemIndex) {
+        return updatedItem;
+      } else {
+        return item;
+      }
+    });
+    const updatedList = { ...list, items: items };
+    const updatedGroceryList = groceryLists.map((list) => {
+      if (list.id === listID) {
+        return updatedList;
+      } else {
+        return list;
+      }
+    });
+    setGroceryLists(updatedGroceryList);
   };
 
   useEffect(() => {
-    // console.log(newGroceryLists);
-    // console.log(groceryListsUpdated);
-    // console.log(groceryLists);
     if (groceryListsUpdated) {
       setGroceryLists(groceryLists);
       setGroceryListsUpdated(false);
     }
-    // console.log(groceryLists);
   }, [groceryListsUpdated, newGroceryLists, groceryLists]);
 
   return (
@@ -64,7 +82,6 @@ const ShoppingList = () => {
                 <Card.Description>
                   <List>
                     {list.items.map((item, index) => {
-                      console.log(item);
                       return (
                         <List.Item
                           key={index}
@@ -80,7 +97,14 @@ const ShoppingList = () => {
                               item.bought ? true : false
                             }
                             onChange={() =>
-                              handleItemCrossed(item, item.bought)
+                              handleItemCrossed(
+                                item,
+                                item.bought,
+                                list.id,
+                                index,
+                                list.items,
+                                list
+                              )
                             }
                           />
                           {item.name}
