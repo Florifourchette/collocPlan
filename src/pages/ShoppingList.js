@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import shoppingList from '../samples/shoppingList';
 import NewGroceryItem from '../components/NewGroceryItem';
 import { Card, List } from 'semantic-ui-react';
+import { Form } from 'react-bootstrap';
+import NewListForm from '../components/NewListForm';
 
 const ShoppingList = () => {
   const [groceryLists, setGroceryLists] = useState(shoppingList());
   const [itemForm, setItemForm] = useState(false);
+  const [listForm, setListForm] = useState(false);
   const [activeList, setActiveList] = useState();
-  console.log(groceryLists);
+  const [groceryListsUpdated, setGroceryListsUpdated] =
+    useState(false);
+  const [newGroceryLists, setNewGroceryLists] =
+    useState(groceryLists);
 
   const handleDeleteList = (index) => {
     setGroceryLists(
@@ -18,19 +24,70 @@ const ShoppingList = () => {
   };
 
   const handleNewItem = (listIndex) => {
-    console.log('clicked');
     setActiveList(listIndex);
     setItemForm((prev) => !prev);
   };
 
+  const handleItemCrossed = (
+    item,
+    status,
+    listID,
+    itemIndex,
+    items,
+    list
+  ) => {
+    const updatedItem = { ...item, bought: !status };
+    items = items.map((item) => {
+      if (items.indexOf(item) === itemIndex) {
+        return updatedItem;
+      } else {
+        return item;
+      }
+    });
+    const updatedList = { ...list, items: items };
+    const updatedGroceryList = groceryLists.map((list) => {
+      if (list.id === listID) {
+        return updatedList;
+      } else {
+        return list;
+      }
+    });
+    setGroceryLists(updatedGroceryList);
+  };
+
+  useEffect(() => {
+    if (groceryListsUpdated) {
+      setGroceryLists(groceryLists);
+      setGroceryListsUpdated(false);
+    }
+  }, [groceryListsUpdated, newGroceryLists, groceryLists]);
+
   return (
     <div className="groceryPage">
       <h1>Groceries</h1>
+
+      {listForm ? (
+        <>
+          <button onClick={() => setListForm((prev) => !prev)}>
+            Cancel
+          </button>
+          <NewListForm
+            setGroceryLists={setGroceryLists}
+            groceryLists={groceryLists}
+          />
+        </>
+      ) : (
+        <>
+          <button onClick={() => setListForm((prev) => !prev)}>
+            Create new list
+          </button>
+        </>
+      )}
       <div className="groceryLists">
         {' '}
         {groceryLists.map((list) => {
           return (
-            <Card key={groceryLists.indexOf(list)}>
+            <Card key={list.id}>
               <Card.Content>
                 <Card.Header>
                   <h4>{list.name}</h4>
@@ -42,12 +99,36 @@ const ShoppingList = () => {
                 >
                   Delete list
                 </button>
+
                 <Card.Description>
                   <List>
-                    {list.items.map((item) => {
+                    {list.items.map((item, index) => {
                       return (
-                        <List.Item key={list.items.indexOf(item)}>
-                          {item}
+                        <List.Item
+                          key={index}
+                          className={
+                            item.bought
+                              ? 'itemCrossed'
+                              : 'itemNotCrossed'
+                          }
+                        >
+                          <Form.Check
+                            id={`checkbox`}
+                            defaultChecked={
+                              item.bought ? true : false
+                            }
+                            onChange={() =>
+                              handleItemCrossed(
+                                item,
+                                item.bought,
+                                list.id,
+                                index,
+                                list.items,
+                                list
+                              )
+                            }
+                          />
+                          {item.name}
                         </List.Item>
                       );
                     })}
@@ -71,7 +152,10 @@ const ShoppingList = () => {
                           activeList={activeList}
                           list={list}
                           groceryLists={groceryLists}
-                          setGroceryLists={setGroceryLists}
+                          setNewGroceryLists={setNewGroceryLists}
+                          setGroceryListsUpdated={
+                            setGroceryListsUpdated
+                          }
                         />
                       }
                     </List.Item>

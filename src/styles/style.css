@@ -73,3 +73,7 @@
   border: black solid 1px;
   z-index: 1000;
 }
+
+.itemCrossed {
+  text-decoration: line-through;
+}
