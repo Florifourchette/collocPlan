@@ -1,5 +1,3 @@
-import React from 'react';
-
 const formattedDateDOM = (date) => {
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 };
