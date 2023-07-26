@@ -3,10 +3,12 @@ import shoppingList from '../samples/shoppingList';
 import NewGroceryItem from '../components/NewGroceryItem';
 import { Card, List } from 'semantic-ui-react';
 import { Form } from 'react-bootstrap';
+import NewListForm from '../components/NewListForm';
 
 const ShoppingList = () => {
   const [groceryLists, setGroceryLists] = useState(shoppingList());
   const [itemForm, setItemForm] = useState(false);
+  const [listForm, setListForm] = useState(false);
   const [activeList, setActiveList] = useState();
   const [groceryListsUpdated, setGroceryListsUpdated] =
     useState(false);
@@ -63,6 +65,24 @@ const ShoppingList = () => {
   return (
     <div className="groceryPage">
       <h1>Groceries</h1>
+
+      {listForm ? (
+        <>
+          <button onClick={() => setListForm((prev) => !prev)}>
+            Cancel
+          </button>
+          <NewListForm
+            setGroceryLists={setGroceryLists}
+            groceryLists={groceryLists}
+          />
+        </>
+      ) : (
+        <>
+          <button onClick={() => setListForm((prev) => !prev)}>
+            Create new list
+          </button>
+        </>
+      )}
       <div className="groceryLists">
         {' '}
         {groceryLists.map((list) => {
@@ -79,6 +99,7 @@ const ShoppingList = () => {
                 >
                   Delete list
                 </button>
+
                 <Card.Description>
                   <List>
                     {list.items.map((item, index) => {
