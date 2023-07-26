@@ -8,17 +8,19 @@ const NewGroceryItem = ({
   activeList,
   list,
   groceryLists,
-  setGroceryLists,
+  setGroceryListsUpdated,
 }) => {
   const [newItem, setNewItem] = useState('');
+  const [items, setItems] = useState(list.items);
 
   const handleSumbit = () => {
-    list = {
-      ...list,
-      items: [...list.items, newItem],
-    };
-    console.log(list);
+    setItems([...items, newItem]);
   };
+
+  useEffect(() => {
+    groceryLists[listIndex] = { ...list, items: items };
+    setGroceryListsUpdated(true);
+  }, [items]);
 
   if (itemForm && listIndex === activeList) {
     return (

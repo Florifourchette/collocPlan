@@ -7,6 +7,10 @@ const ShoppingList = () => {
   const [groceryLists, setGroceryLists] = useState(shoppingList());
   const [itemForm, setItemForm] = useState(false);
   const [activeList, setActiveList] = useState();
+  const [groceryListsUpdated, setGroceryListsUpdated] =
+    useState(false);
+  const [newGroceryLists, setNewGroceryLists] =
+    useState(groceryLists);
   console.log(groceryLists);
 
   const handleDeleteList = (index) => {
@@ -18,10 +22,20 @@ const ShoppingList = () => {
   };
 
   const handleNewItem = (listIndex) => {
-    console.log('clicked');
     setActiveList(listIndex);
     setItemForm((prev) => !prev);
   };
+
+  useEffect(() => {
+    // console.log(newGroceryLists);
+    // console.log(groceryListsUpdated);
+    // console.log(groceryLists);
+    if (groceryListsUpdated) {
+      setGroceryLists(groceryLists);
+      setGroceryListsUpdated(false);
+    }
+    // console.log(groceryLists);
+  }, [groceryListsUpdated, newGroceryLists, groceryLists]);
 
   return (
     <div className="groceryPage">
@@ -30,7 +44,7 @@ const ShoppingList = () => {
         {' '}
         {groceryLists.map((list) => {
           return (
-            <Card key={groceryLists.indexOf(list)}>
+            <Card key={list.id}>
               <Card.Content>
                 <Card.Header>
                   <h4>{list.name}</h4>
@@ -44,11 +58,9 @@ const ShoppingList = () => {
                 </button>
                 <Card.Description>
                   <List>
-                    {list.items.map((item) => {
+                    {list.items.map((item, index) => {
                       return (
-                        <List.Item key={list.items.indexOf(item)}>
-                          {item}
-                        </List.Item>
+                        <List.Item key={index}>{item}</List.Item>
                       );
                     })}
                     <List.Item
@@ -71,7 +83,10 @@ const ShoppingList = () => {
                           activeList={activeList}
                           list={list}
                           groceryLists={groceryLists}
-                          setGroceryLists={setGroceryLists}
+                          setNewGroceryLists={setNewGroceryLists}
+                          setGroceryListsUpdated={
+                            setGroceryListsUpdated
+                          }
                         />
                       }
                     </List.Item>
