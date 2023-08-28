@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
+
+body {
+  background-color: #ffeecc !important;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #ffeecc;
+  font-family: 'Borel';
+  line-height: normal;
+}
+
+h1 {
+  font-family: 'Borel';
+  color: grey;
+  padding: 1em;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}

@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
+
+.scheduler .calendar {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: space-around;
+  width: 80vh;
+  height: 80vh;
+  width: 100%;
+}
+
+.scheduler .eventForm {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.scheduler .ui.form{
+  position: fixed;
+  top: 55%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 50%;
+max-width: 400px;
+min-width: 250px;
+}
+
+.scheduler .header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+
+.scheduler h1 {
+  flex: 1;
+  text-align: center;
+  margin-top: 5em;
+  font-family: 'Borel';
+}
+
+.scheduler .addNewEvent {
+  background: none;
+  border: none;
+  font-size: 3em;
+  margin-right: 1em;
+}
+
+.scheduler .addNewEvent svg {
+  color: #febbcc;
+}
+
+.scheduler .rbc-btn-group :hover {
+  background-color: #ffcccc;
+}
+
+.scheduler .rbc-toolbar button.rbc-active {
+  background-color: #ffcccc;
+}
+
+.scheduler .rbc-off-range-bg {
+  background-color: #eaf6ff;
+}
+
+.scheduler .rbc-today {
+  background-color: #ffcccc;
+}
+
+.scheduler .rbc-button-link {
+  padding-top: 1em;
+}
+
+.scheduler .rbc-header {
+  padding: 1em;
+}
+
+.scheduler .ui.form {
+  background-color: #ffddcc;
+  border: 5px solid #ffeecc;
+  border-radius: 20px;
+  padding: 1em;
+}
+
+.scheduler .ui.form .field {
+  margin: 1em;
+}
+
+.scheduler .ui.form p {
+  margin-top: 0.6em;
+}
+
+.scheduler .ui.form input[type='text'] {
+  font-family: 'Borel';
+  line-height: 2.5 !important;
+  vertical-align: bottom;
+  padding-bottom: 0;
+}
+
+.ui.form input[type=text]:focus{
+  border:solid #e48586 !important;
+  color:#e48586 !important
+}
+
+.scheduler .ui.form input[type='date'] {
+  font-family: 'Borel';
+  line-height: normal;
+}
+
+.ui.form input[type=date]:focus{
+  border:solid #e48586 !important;
+  color:#e48586 !important
+}
+
+.scheduler .ui.form input[type='time'] {
+  font-family: 'Borel';
+  line-height: normal;
+}
+
+.ui.form input[type=time]:focus{
+  border:solid #e48586 !important;
+  color:#e48586 !important
+}
+
+.scheduler .rbc-event {
+  background-color: #e48586;
+}
+
+.scheduler .rbc-event.rbc-selected {
+  border: none;
+}
+
+.scheduler .rbc-event:active {
+  border: none;
+}
+
+.scheduler .rbc-event-content{
+  line-height: normal;
+}
+
+
+.scheduler .ui.form button {
+  font-family: 'borel';
+  letter-spacing: 1px;
+  padding: 8px 20px 0px;
+  border: 1px solid rgba(0,0,0,.6);
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  color: rgba(0,0,0,.6);
+  min-height: 1em;
+  border-radius: 0.28571429rem;
+  font-weight: lighter;
+}
+
+.scheduler .ui.form button[type='submit']{
+padding:20px 20px 10px
+}
+
+.scheduler .ui.form button:hover {
+  background-color: #febbcc;
+}
+
+@media screen and (max-width: 790px) {
+  .scheduler .rbc-toolbar {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .scheduler .rbc-toolbar .rbc-toolbar-label {
+    margin: 1em;
+  }
+}

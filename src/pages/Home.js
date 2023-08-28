@@ -42,12 +42,15 @@ const Home = () => {
                   <List.Content>
                     <List.Header>{user.username}</List.Header>
                     <List.Description>
-                      joined the flat on{' '}
-                      {formattedDate(user.joined_date)}
-                      <br />
-                      birthday:{formattedDate(user.user_birthday)}
-                      <br />
-                      credit:{user.credit}
+                      <p>
+                        joined the flat on{' '}
+                        {formattedDate(user.joined_date)}
+                      </p>
+                      <p>
+                        {' '}
+                        birthday:{formattedDate(user.user_birthday)}
+                      </p>
+                      <p> credit:{user.credit}</p>
                     </List.Description>
                   </List.Content>
                 </List.Item>

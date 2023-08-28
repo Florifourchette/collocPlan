@@ -16,7 +16,13 @@ const NavBar = () => {
               <NavLink to="/" activeStyle>
                 Home
               </NavLink>
-              <NavLink to="/scheduler" activeStyle>
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isPending ? 'pending' : isActive ? 'active' : ''
+                }
+                to="/scheduler"
+                activeStyle
+              >
                 Scheduler
               </NavLink>
               <NavLink to="/profile" activeStyle>
