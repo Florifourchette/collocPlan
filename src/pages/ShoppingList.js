@@ -78,7 +78,7 @@ const ShoppingList = () => {
         </>
       ) : (
         <>
-          <button onClick={() => setListForm((prev) => !prev)}>
+          <button className='createNewList' onClick={() => setListForm((prev) => !prev)}>
             Create new list
           </button>
         </>
@@ -87,19 +87,11 @@ const ShoppingList = () => {
         {' '}
         {groceryLists.map((list) => {
           return (
-            <Card key={list.id}>
+            <Card className="list_card" key={list.id}>
               <Card.Content>
                 <Card.Header>
                   <h4>{list.name}</h4>
                 </Card.Header>
-                <button
-                  onClick={() =>
-                    handleDeleteList(groceryLists.indexOf(list))
-                  }
-                >
-                  Delete list
-                </button>
-
                 <Card.Description>
                   <List>
                     {list.items.map((item, index) => {
@@ -127,22 +119,23 @@ const ShoppingList = () => {
                                 list
                               )
                             }
+                            label={item.name}
                           />
-                          {item.name}
                         </List.Item>
                       );
                     })}
                     <List.Item
+                      className="createNewitem"
                       onClick={() =>
                         handleNewItem(groceryLists.indexOf(list))
                       }
                     >
-                      <strong>
-                        {itemForm &&
-                        groceryLists.indexOf(list) === activeList
-                          ? 'Cancel'
-                          : 'Add new Item'}
-                      </strong>
+                      <button className='addItemButton'>
+                          {itemForm &&
+                          groceryLists.indexOf(list) === activeList
+                            ? 'Cancel'
+                            : 'Add new Item'}
+                      </button>
                     </List.Item>
                     <List.Item>
                       {
@@ -160,6 +153,15 @@ const ShoppingList = () => {
                       }
                     </List.Item>
                   </List>
+                </Card.Description>
+                <Card.Description className="deleteButtonContainer">
+                  <button className='deleteListButton'
+                    onClick={() =>
+                      handleDeleteList(groceryLists.indexOf(list))
+                    }
+                  >
+                    Delete list
+                  </button>
                 </Card.Description>
               </Card.Content>
             </Card>

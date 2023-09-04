@@ -7,6 +7,7 @@ import addMinutes from '../utils/addMinutes';
 import dateConverter from '../utils/dateConverter';
 import timeConverter from '../utils/timeConverter';
 import schedules from '../samples/schedules';
+import { FaPlusCircle } from 'react-icons/fa';
 
 const localizer = momentLocalizer(moment);
 
@@ -77,7 +78,13 @@ const Scheduler = () => {
   return (
     <div className="scheduler">
       <div className="calendar">
-        <button onClick={handleClick}>Add new event</button>
+        <div className='header'>
+          <h1>Scheduler</h1>
+          <button className="addNewEvent" onClick={handleClick}>
+            <FaPlusCircle />
+          </button>
+        </div>
+
         <Calendar
           localizer={localizer}
           events={events}
