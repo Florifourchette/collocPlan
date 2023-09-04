@@ -1,8 +1,3 @@
-.App {
-  display: flex;
-  flex-direction: column;
-}
-
 .home {
   display: flex;
   flex-direction: column;
@@ -15,55 +10,7 @@
   align-items: center;
 }
 
-.groceryPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.groceryPage .ui.card {
-  margin: 1em;
-}
-
-.groceryPage .ui.form {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 1em;
-  border: none;
-}
-.groceryPage .ui.form .field {
-  width: 100%;
-}
-
-.groceryLists {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.groceryList {
-  border: solid green;
-}
-
-.scheduler {
-  display: flex;
-  justify-content: center;
-}
-.calendar {
-  width: 90%;
-  height: 95vh;
-}
-
-.eventForm {
-  background-color: white;
-  position: absolute;
-  top: 10px;
-  display: flex;
-  flex-direction: column;
-}
 
 .ui.form {
   position: absolute;

@@ -24,19 +24,18 @@ const NewGroceryItem = ({
 
   if (itemForm && listIndex === activeList) {
     return (
-      <div>
         <Form onSubmit={handleSumbit}>
           <Form.Field>
             <input
-              placeholder="What do you need?"
+              placeholder="New item"
               onChange={(e) => {
                 setNewItem(e.target.value);
-              }}
+            }}
+            type='text'
             />
           </Form.Field>
-          <Button type="submit">Add</Button>
+          <Button className='addNewitemButton' type="submit">Add</Button>
         </Form>
-      </div>
     );
   } else {
     <></>;
