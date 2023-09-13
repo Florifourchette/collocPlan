@@ -31,6 +31,9 @@ const NavBar = () => {
               <NavLink to="/grocery" activeStyle>
                 Grocery
               </NavLink>
+              <NavLink to="/userCreation" activeStyle>
+                User creation
+              </NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
