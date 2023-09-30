@@ -5,6 +5,8 @@ import Home from '../pages/Home';
 import UserPage from '../pages/UserPage';
 import ShoppingList from '../pages/ShoppingList';
 import UserCreation from '../pages/UserCreation';
+import ColocCreation from '../pages/ColocCreation';
+
 
 const Router = () => {
   return (
@@ -18,6 +20,11 @@ const Router = () => {
           path="/userCreation"
           element={<UserCreation />}
         ></Route>
+        <Route
+          path="/newColoc"
+          element={<ColocCreation />}
+        ></Route>
+
       </Routes>
     </div>
   );

@@ -34,6 +34,10 @@ const NavBar = () => {
               <NavLink to="/userCreation" activeStyle>
                 User creation
               </NavLink>
+              <NavLink to="/newColoc" activeStyle>
+                New Coloc
+              </NavLink>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
