@@ -7,6 +7,7 @@ import ShoppingList from '../pages/ShoppingList';
 import UserCreation from '../pages/UserCreation';
 import ColocCreation from '../pages/ColocCreation';
 
+
 const Router = () => {
   return (
     <div>
@@ -23,6 +24,7 @@ const Router = () => {
           path="/newColoc"
           element={<ColocCreation />}
         ></Route>
+
       </Routes>
     </div>
   );

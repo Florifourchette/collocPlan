@@ -37,6 +37,7 @@ const NavBar = () => {
               <NavLink to="/newColoc" activeStyle>
                 New Coloc
               </NavLink>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
